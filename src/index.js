@@ -256,6 +256,12 @@ var GIF = (function () {
 
       const image = new Blob([data], { type: "image/gif" });
 
+      this.freeWorkers.forEach(worker => {
+        if (worker !== null) {
+          worker.terminate();
+        }
+      });
+
       return this.emit("finished", image, data);
     }
 
